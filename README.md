@@ -1,5 +1,7 @@
 # WeatherStack — Weather SaaS
 
+**Live:** [weatherapp-api-delta.vercel.app](https://weatherapp-api-delta.vercel.app)
+
 A React weather app built with **glassmorphism UI** and the [Weatherstack API](https://weatherstack.com/documentation). It supports **current** weather, **forecast**, **historical**, **marine**, and **location** lookup with search and filter.
 
 ## Features
@@ -36,10 +38,14 @@ A React weather app built with **glassmorphism UI** and the [Weatherstack API](h
 ## Deploy on Vercel
 
 1. Import the repo in [Vercel](https://vercel.com).
-2. **Add the API key:** Project → **Settings** → **Environment Variables** → add:
-   - **Name:** `VITE_WEATHERSTACK_ACCESS_KEY` (or `WEATHERSTACK_ACCESS_KEY`)
-   - **Value:** your Weatherstack access key
-3. **Redeploy** (Deployments → … → Redeploy) so the key is available. The app uses a serverless proxy so the key stays server-side and CORS is avoided.
+2. **Add the API key** (required or the app will show “Set the API key in Vercel”):
+   - Open your project on Vercel → **Settings** → **Environment Variables**.
+   - Click **Add** (or **Add New**).
+   - **Key:** `WEATHERSTACK_ACCESS_KEY` (exactly this name).
+   - **Value:** your Weatherstack access key from [weatherstack.com/signup/free](https://weatherstack.com/signup/free).
+   - **Environment:** tick **Production** (and **Preview** if you use preview URLs).
+   - Save.
+3. **Redeploy:** **Deployments** → open the **⋯** menu on the latest deployment → **Redeploy**. Wait for the build to finish, then open your app URL again.
 
 ## API Reference
 

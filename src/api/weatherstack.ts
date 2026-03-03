@@ -10,7 +10,7 @@ const BASE_URL = '/api/weatherstack'
 const API_KEY_HELP =
   import.meta.env.DEV
     ? 'Add your Weatherstack API key: create a file named .env in the project root (same folder as package.json) with exactly this line: VITE_WEATHERSTACK_ACCESS_KEY=your_key_here — then restart the dev server (stop and run npm run dev again). Get a free key at https://weatherstack.com/signup/free'
-    : 'Add your API key in Vercel: Project → Settings → Environment Variables → add VITE_WEATHERSTACK_ACCESS_KEY (or WEATHERSTACK_ACCESS_KEY), then redeploy. Get a free key at https://weatherstack.com/signup/free'
+    : 'Set the API key in Vercel: 1) vercel.com → your project. 2) Settings → Environment Variables. 3) Add Name = WEATHERSTACK_ACCESS_KEY, Value = your key (from https://weatherstack.com/signup/free). 4) Select Production. 5) Save. 6) Deployments → ⋮ → Redeploy, then refresh this page.'
 
 const RATE_LIMIT_MSG =
   "You've hit the API rate limit (free plan: 100 requests/month). Wait until next month for the quota to reset, or upgrade at https://weatherstack.com/pricing. To save requests, use the search box and click Search only when needed — location suggestions are disabled on Current to preserve your quota."

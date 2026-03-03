@@ -8,7 +8,7 @@ const WEATHERSTACK_BASE = 'https://api.weatherstack.com'
 
 export default async function handler(req, res) {
   const path = Array.isArray(req.query.path) ? req.query.path.join('/') : (req.query.path || '')
-  const key = process.env.VITE_WEATHERSTACK_ACCESS_KEY || process.env.WEATHERSTACK_ACCESS_KEY
+  const key = (process.env.WEATHERSTACK_ACCESS_KEY || process.env.VITE_WEATHERSTACK_ACCESS_KEY || '').trim()
 
   if (!key) {
     res.status(500).json({
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       error: {
         code: 101,
         type: 'missing_access_key',
-        info: 'Add VITE_WEATHERSTACK_ACCESS_KEY (or WEATHERSTACK_ACCESS_KEY) in Vercel: Project → Settings → Environment Variables, then redeploy. Get a key at https://weatherstack.com/signup/free',
+        info: 'Set the API key in Vercel: 1) Open vercel.com → your project (Weatherapp-API). 2) Settings → Environment Variables. 3) Add: Name = WEATHERSTACK_ACCESS_KEY, Value = your key from https://weatherstack.com/signup/free. 4) Choose Production (and Preview if needed). 5) Save. 6) Deployments → ⋮ on latest → Redeploy. Wait for the new deployment, then refresh this page.',
       },
     })
     return
