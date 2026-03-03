@@ -1,0 +1,121 @@
+.page {
+  width: 100%;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.page-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.page-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-error {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--danger);
+  border-color: rgba(196, 92, 74, 0.3);
+}
+
+.page-loading {
+  color: var(--text-muted);
+  padding: 2rem;
+}
+
+.page-muted {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Current */
+.current-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.current-hero {
+  padding: 1.5rem;
+}
+
+.current-loc {
+  margin-bottom: 1rem;
+}
+
+.current-name {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.current-meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.current-main {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.current-icon {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.current-temp {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.current-desc {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.current-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.detail {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.15rem;
+}

@@ -1,0 +1,39 @@
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.forecast-card {
+  padding: 1.25rem;
+}
+
+.forecast-date {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.forecast-temps {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.forecast-max {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.forecast-min {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.forecast-astro,
+.forecast-extra {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

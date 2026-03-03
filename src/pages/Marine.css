@@ -1,0 +1,60 @@
+.marine-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.marine-coords {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.marine-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--bg-deep);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+}
+
+.marine-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.marine-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.marine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.marine-card {
+  padding: 1.25rem;
+}
+
+.marine-date {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.marine-temps {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.marine-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}

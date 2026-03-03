@@ -1,0 +1,52 @@
+.historical-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.historical-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--bg-deep);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+}
+
+.historical-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.historical-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.historical-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.historical-card {
+  padding: 1.25rem;
+}
+
+.historical-date {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.historical-temps {
+  margin-bottom: 0.35rem;
+}
+
+.historical-detail {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
