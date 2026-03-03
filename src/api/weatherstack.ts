@@ -4,11 +4,13 @@
  * Docs: https://weatherstack.com/documentation
  */
 
-// Use proxy in dev to avoid CORS (Weatherstack does not send CORS headers)
-const BASE_URL = import.meta.env.DEV ? '/api/weatherstack' : 'https://api.weatherstack.com'
+// Always use proxy: in dev (Vite proxy), in production (Vercel serverless function). Avoids CORS and keeps key server-side in prod.
+const BASE_URL = '/api/weatherstack'
 
 const API_KEY_HELP =
-  'Add your Weatherstack API key: create a file named .env in the project root (same folder as package.json) with exactly this line: VITE_WEATHERSTACK_ACCESS_KEY=your_key_here — then restart the dev server (stop and run npm run dev again). Get a free key at https://weatherstack.com/signup/free'
+  import.meta.env.DEV
+    ? 'Add your Weatherstack API key: create a file named .env in the project root (same folder as package.json) with exactly this line: VITE_WEATHERSTACK_ACCESS_KEY=your_key_here — then restart the dev server (stop and run npm run dev again). Get a free key at https://weatherstack.com/signup/free'
+    : 'Add your API key in Vercel: Project → Settings → Environment Variables → add VITE_WEATHERSTACK_ACCESS_KEY (or WEATHERSTACK_ACCESS_KEY), then redeploy. Get a free key at https://weatherstack.com/signup/free'
 
 const RATE_LIMIT_MSG =
   "You've hit the API rate limit (free plan: 100 requests/month). Wait until next month for the quota to reset, or upgrade at https://weatherstack.com/pricing. To save requests, use the search box and click Search only when needed — location suggestions are disabled on Current to preserve your quota."
@@ -19,21 +21,24 @@ function isRateLimitError(data: { error?: { code?: number; info?: string } }): b
   return code === 429 || info.includes('rate') || info.includes('limitation')
 }
 
-function getAccessKey(): string {
+function getAccessKey(): string | null {
   const key = (import.meta.env.VITE_WEATHERSTACK_ACCESS_KEY as string)?.trim()
-  if (!key) {
-    throw new Error(API_KEY_HELP)
-  }
-  return key
+  return key || null
 }
 
 function buildParams(params: Record<string, string | number | undefined>): string {
+  const cleaned: Record<string, string> = {}
+  // In production we use the Vercel proxy; it injects the key. In dev, we send the key so Vite proxy can forward.
   const key = getAccessKey()
-  const cleaned: Record<string, string> = { access_key: key }
+  if (key) cleaned.access_key = key
   for (const [k, v] of Object.entries(params)) {
     if (v !== undefined && v !== '') cleaned[k] = String(v)
   }
-  return new URLSearchParams(cleaned).toString()
+  const qs = new URLSearchParams(cleaned).toString()
+  if (!key && import.meta.env.DEV) {
+    throw new Error(API_KEY_HELP)
+  }
+  return qs
 }
 
 export type Units = 'm' | 'f' | 's'

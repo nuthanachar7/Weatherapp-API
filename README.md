@@ -33,6 +33,14 @@ A React weather app built with **glassmorphism UI** and the [Weatherstack API](h
 
    Open [http://localhost:5173](http://localhost:5173).
 
+## Deploy on Vercel
+
+1. Import the repo in [Vercel](https://vercel.com).
+2. **Add the API key:** Project → **Settings** → **Environment Variables** → add:
+   - **Name:** `VITE_WEATHERSTACK_ACCESS_KEY` (or `WEATHERSTACK_ACCESS_KEY`)
+   - **Value:** your Weatherstack access key
+3. **Redeploy** (Deployments → … → Redeploy) so the key is available. The app uses a serverless proxy so the key stays server-side and CORS is avoided.
+
 ## API Reference
 
 - Base URL: `https://api.weatherstack.com/`
