@@ -38,15 +38,33 @@ function buildParams(params: Record<string, string | number | undefined>): strin
 
 export type Units = 'm' | 'f' | 's'
 
+// Current weather API response (explicit type avoids TS circular reference in cache)
+export interface CurrentWeatherResponse {
+  request?: { type?: string; query?: string; unit?: string }
+  location?: { name?: string; country?: string; region?: string; lat?: string; lon?: string; localtime?: string }
+  current?: {
+    temperature?: number
+    feelslike?: number
+    humidity?: number
+    wind_speed?: number
+    wind_dir?: string
+    pressure?: number
+    uv_index?: number
+    visibility?: number
+    weather_icons?: string[]
+    weather_descriptions?: string[]
+  }
+}
+
 // Simple in-memory cache for current weather (saves quota on free plan)
-const currentCache = new Map<string, { data: unknown; at: number }>()
+const currentCache = new Map<string, { data: CurrentWeatherResponse; at: number }>()
 const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
 
 // Current weather
-export async function getCurrentWeather(query: string, units: Units = 'm') {
+export async function getCurrentWeather(query: string, units: Units = 'm'): Promise<CurrentWeatherResponse> {
   const key = `${query.trim().toLowerCase()}|${units}`
   const cached = currentCache.get(key)
-  if (cached && Date.now() - cached.at < CACHE_TTL_MS) return cached.data as Awaited<ReturnType<typeof getCurrentWeather>>
+  if (cached && Date.now() - cached.at < CACHE_TTL_MS) return cached.data
 
   const qs = buildParams({ query, units })
   const res = await fetch(`${BASE_URL}/current?${qs}`)
@@ -56,8 +74,8 @@ export async function getCurrentWeather(query: string, units: Units = 'm') {
     if (isRateLimitError(data)) throw new Error(RATE_LIMIT_MSG)
     throw new Error(data.error.info || 'Current weather request failed')
   }
-  currentCache.set(key, { data, at: Date.now() })
-  return data
+  currentCache.set(key, { data: data as CurrentWeatherResponse, at: Date.now() })
+  return data as CurrentWeatherResponse
 }
 
 // Forecast (Professional plan+) — 1–14 days
